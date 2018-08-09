@@ -1,0 +1,81 @@
+            .Title{
+                float: right;
+                margin:inherit;
+                background-color: lightorange;
+                border: outset orange;
+                height: auto;
+                width: 70%;
+                color:#CC6600;
+                border-radius:10px ;
+                
+                
+            }
+            .Indice{
+                height:auto;
+                width: 25% ;
+                margin:inherit;
+                background-color: saddlebrown;
+                border: outset orange;
+                position:fixed;
+                color:#CC6600;
+                border-radius:10px ;
+                
+                
+            }
+            .Productos{
+                margin:inherit;
+                float:right;
+                height: auto;
+                width: 70%;
+                border-radius:14px ;
+                color:#CC6600;
+                border: outset orange;
+            }
+            .Especialidades{
+                margin:inherit;
+                float:right;
+                height: auto;
+                width: 70%;
+                border-radius:14px ;
+                color:#CC6600;
+                border: outset orange;
+            }
+            .Ordena{
+                margin:inherit;
+                float:right;
+                border-radius:14px ;
+                height: auto;
+                width: 70%;
+                color:#CC6600;
+                border: outset orange;
+            }
+            .Acer{
+                margin:inherit;
+                float:right;
+                height: auto;
+                width: 70%;
+                border-radius:14px ;
+                color:#CC6600;
+                border: outset orange;
+               
+            }
+            .Sugerencias{
+                margin:inherit;
+                float:right;
+                height: auto;
+                width: 70%;
+                border-radius:14px ;
+                color:#CC6600;
+                border: outset orange;
+            }
+            .Contactanos{
+                margin: inherit;
+                float: right;
+                background-color: lightorange;
+                width: 70%;
+                height: auto;
+                color:#CC6600;
+                border: outset orange;
+                border-radius:14px ;
+            }
+            
