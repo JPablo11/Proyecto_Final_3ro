@@ -1,0 +1,159 @@
+            
+
+            .Title{
+                float:inherit;
+                margin:inherit;
+                height: 30%;
+                width: 20%;
+                
+                
+                
+            }
+            .Title2{
+                float:right;
+                margin:inherit;
+                height: 10%;
+                width: 70%;
+                color:whitesmoke;   
+            }
+            .Indice{
+              height:10%;
+                width: 17%;
+                margin-left: auto;
+                margin-right: auto;  margin:inherit; position:static;
+               
+                float:left;
+                
+                
+            }
+            .Menu
+            {
+                float:none;
+                height:90%;
+                width:90%;
+                margin-left: auto;
+                margin-top:1.5%;
+                margin-right: auto;
+                border-radius: 14px;
+            }
+
+            .Indice2{
+                height:10%;
+                width: 17%;
+                margin-left: auto;
+                margin-right: auto;  margin:inherit; position:static;
+                
+                float:left;
+                
+            }
+            .Indice3{
+                height:10%;
+                width: 20%;
+                margin-left: auto;
+                margin-right: auto;  margin:inherit; position:static;
+                
+                float:left;
+                
+            }
+            .Indice4{
+                height:10%;
+                width: 17%;
+               margin-left: auto;
+                margin-right: auto; margin:inherit; position:static;
+                
+                float:left;
+                
+            }
+            .Indice5{
+              height:10%;
+                width: 17%;
+                margin-left: auto;
+                margin-right: auto;  margin:inherit; position:static;
+                
+                float:left;
+               
+            }
+            .Index{
+                margin:inherit;
+                margin-right: auto;
+                margin-left: auto;
+                margin-top: 15%;
+                height: 90%;
+                width: 90%;    
+            }
+            .Especialidades1{
+                float: left;
+                height:40%;
+                width:30%;
+                background-image: url(Images/bg_slider.jpg);
+                border-radius: 14px;
+            }
+            .space{
+                float: left;
+                height:5%;
+                width:5%;
+            }
+            .space2{
+                float: left;
+                height:5%;
+                width:100%;
+            }
+            .Especialidades2{
+                float: left;
+                height:auto;
+                width:30%;
+                background-image: url(Images/bg_slider.jpg);
+                border-radius: 14px;
+            }
+            .Especialidades3{
+                float: left;
+                height:40%;
+                width:30%;
+                background-image: url(Images/bg_slider.jpg);
+                border-radius: 14px;
+            }
+            .Tacos1{
+                float: left;
+                height:40%;
+                width:30%;
+                border-radius: 14px;
+            }
+            .Tacos2{
+                float: left;
+                height:40%;
+                width:30%;
+                background-image: url(Images/bg_slider.jpg);
+                border-radius: 14px;
+            }
+            .Tacos3{
+                float: left;
+                height:40%;
+                width:30%;
+                
+                border-radius: 14px;
+            }
+            .Imagenes1{
+                float:none;
+                height:90%;
+                width:90%;
+                margin-left: 5%;
+                margin-right:5%;
+                margin-top:3%;
+                margin-bottom: auto;
+            }
+            .Division{
+                margin:inherit;
+                height: 30px;
+                width: 100%;
+            }
+           
+            .Contactanos{
+                width: 100%;
+                height: auto;
+                background-image: url(Images/bg_slider.jpg);
+                font-style: oblique;
+                 border: outset black;
+                border-radius: 14px;
+                color:#660000;
+            }
+            
