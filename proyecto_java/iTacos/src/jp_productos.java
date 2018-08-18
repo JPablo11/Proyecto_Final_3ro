@@ -1,9 +1,12 @@
+    import java.awt.event.KeyAdapter;
+    import java.awt.event.KeyEvent;
     import java.sql.Connection;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.sql.Statement;
     import java.sql.PreparedStatement;
     import javax.swing.JOptionPane;
+    import javax.swing.JTextField;
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableModel;
     
@@ -39,6 +42,12 @@ public class jp_productos extends javax.swing.JPanel {
     public jp_productos() {
         initComponents();
         cargar();
+        SLetras(jtf_nombre_produ);
+        SNumeros(jtf_codigo_produ);
+        SFloats(jtf_precio_produ);
+        SFloats(jtf_contenido_produ);
+        
+        
     }
     
     void cargar(){
@@ -116,8 +125,26 @@ public class jp_productos extends javax.swing.JPanel {
         jl_precio_produ.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
         jl_precio_produ.setText("Precio");
         jp_producto.add(jl_precio_produ, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, 30));
+
+        jtf_codigo_produ.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_codigo_produKeyTyped(evt);
+            }
+        });
         jp_producto.add(jtf_codigo_produ, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 98, -1));
+
+        jtf_nombre_produ.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombre_produKeyTyped(evt);
+            }
+        });
         jp_producto.add(jtf_nombre_produ, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 98, -1));
+
+        jtf_existencia_produ.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_existencia_produKeyTyped(evt);
+            }
+        });
         jp_producto.add(jtf_existencia_produ, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 98, -1));
 
         jt_datos_pro.setModel(new javax.swing.table.DefaultTableModel(
@@ -146,7 +173,7 @@ public class jp_productos extends javax.swing.JPanel {
 
         jb_nuevo_produ.setBackground(new java.awt.Color(153, 153, 153));
         jb_nuevo_produ.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
-        jb_nuevo_produ.setForeground(new java.awt.Color(255, 255, 255));
+        jb_nuevo_produ.setForeground(new java.awt.Color(51, 51, 51));
         jb_nuevo_produ.setText("Nuevo");
         jb_nuevo_produ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_nuevo_produ.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +185,7 @@ public class jp_productos extends javax.swing.JPanel {
 
         jb_actualizar_produ.setBackground(new java.awt.Color(153, 153, 153));
         jb_actualizar_produ.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
-        jb_actualizar_produ.setForeground(new java.awt.Color(255, 255, 255));
+        jb_actualizar_produ.setForeground(new java.awt.Color(51, 51, 51));
         jb_actualizar_produ.setText("Actualizar");
         jb_actualizar_produ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_actualizar_produ.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +197,7 @@ public class jp_productos extends javax.swing.JPanel {
 
         jb_borrar_produ.setBackground(new java.awt.Color(153, 153, 153));
         jb_borrar_produ.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
-        jb_borrar_produ.setForeground(new java.awt.Color(255, 255, 255));
+        jb_borrar_produ.setForeground(new java.awt.Color(51, 51, 51));
         jb_borrar_produ.setText("Borrar");
         jb_borrar_produ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_borrar_produ.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +209,7 @@ public class jp_productos extends javax.swing.JPanel {
 
         jb_guardar_produ.setBackground(new java.awt.Color(153, 153, 153));
         jb_guardar_produ.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
-        jb_guardar_produ.setForeground(new java.awt.Color(255, 255, 255));
+        jb_guardar_produ.setForeground(new java.awt.Color(51, 51, 51));
         jb_guardar_produ.setText("Aceptar");
         jb_guardar_produ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_guardar_produ.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +221,7 @@ public class jp_productos extends javax.swing.JPanel {
 
         jb_cancelar_produ.setBackground(new java.awt.Color(255, 0, 0));
         jb_cancelar_produ.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
-        jb_cancelar_produ.setForeground(new java.awt.Color(255, 255, 255));
+        jb_cancelar_produ.setForeground(new java.awt.Color(51, 51, 51));
         jb_cancelar_produ.setText("Cancelar");
         jb_cancelar_produ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_cancelar_produ.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +254,41 @@ public class jp_productos extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    public void SLetras(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(!Character.isLetter(c)){
+                   e.consume();
+               }
+           } 
+        });
+    }
+    public void SNumeros(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(!Character.isDigit(c)){                                      
+                   e.consume();                  
+               }
+           } 
+        });
+    }
+    public void SFloats(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(Character.isDigit(c)){ 
+                                   
+               }else{
+                   if(c == '.'){                                             
+                   }else{
+                       e.consume();
+                   } 
+               }
+           } 
+        });
+    }
     private void jt_datos_proMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_datos_proMouseClicked
         int i = jt_datos_pro.getSelectedRow();
         TableModel model = jt_datos_pro.getModel();
@@ -281,7 +342,7 @@ public class jp_productos extends javax.swing.JPanel {
         try {            
             int eliminar = JOptionPane.showConfirmDialog(null, "Quieres eliminar este registro?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
             if(eliminar == 0){  
-                String delete = ("DELETE FROM empleados WHERE ID_emp=?");
+                String delete = ("DELETE FROM productos WHERE codigo_produ=?");
                 Mysql mysql = new Mysql();
                 Connection con = mysql.getConnection();
                 pst = (PreparedStatement) con.prepareStatement(delete);
@@ -339,6 +400,27 @@ public class jp_productos extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jb_cancelar_produActionPerformed
 
+    private void jtf_codigo_produKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_codigo_produKeyTyped
+        int limit = 11;
+        if(jtf_codigo_produ.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_codigo_produKeyTyped
+
+    private void jtf_nombre_produKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombre_produKeyTyped
+        int limit = 40;
+        if(jtf_nombre_produ.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_nombre_produKeyTyped
+
+    private void jtf_existencia_produKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_existencia_produKeyTyped
+        int limit = 10;
+        if(jtf_existencia_produ.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_existencia_produKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -357,7 +439,7 @@ public class jp_productos extends javax.swing.JPanel {
     private javax.swing.JPanel jp_button_produ;
     private javax.swing.JPanel jp_producto;
     private javax.swing.JTable jt_datos_pro;
-    private javax.swing.JTextField jtf_codigo_produ;
+    public javax.swing.JTextField jtf_codigo_produ;
     private javax.swing.JTextField jtf_contenido_produ;
     private javax.swing.JTextField jtf_existencia_produ;
     private javax.swing.JTextField jtf_nombre_produ;

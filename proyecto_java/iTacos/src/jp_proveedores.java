@@ -1,9 +1,12 @@
+    import java.awt.event.KeyAdapter;
+    import java.awt.event.KeyEvent;
     import java.sql.Connection;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.sql.Statement;
     import java.sql.PreparedStatement;
     import javax.swing.JOptionPane;
+    import javax.swing.JTextField;
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableModel;
     
@@ -38,6 +41,8 @@ public class jp_proveedores extends javax.swing.JPanel {
     public jp_proveedores() {
         initComponents();
         cargar();
+        SLetras(jtf_nombre_prove);
+        SNumeros(jtf_tel_prove);
     }
     void cargar(){
         String [] titulos={"ID","Nombre","Numero de telefono",};
@@ -120,9 +125,24 @@ public class jp_proveedores extends javax.swing.JPanel {
 
         jl_id_prov.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
         jl_id_prov.setText("ID del Proveedor");
-        jp_proveedores.add(jl_id_prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, 30));
+        jp_proveedores.add(jl_id_prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, 40));
         jp_proveedores.add(jtf_id_prove, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 90, -1));
+
+        jtf_nombre_prove.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_nombre_proveKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombre_proveKeyTyped(evt);
+            }
+        });
         jp_proveedores.add(jtf_nombre_prove, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 87, -1));
+
+        jtf_tel_prove.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_tel_proveKeyTyped(evt);
+            }
+        });
         jp_proveedores.add(jtf_tel_prove, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 87, -1));
 
         jp_button_prov.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -209,6 +229,28 @@ public class jp_proveedores extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void SLetras(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(!Character.isLetter(c)){
+                   e.consume();
+               }
+           } 
+        });
+    }
+    public void SNumeros(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(!Character.isDigit(c)){                                      
+                   e.consume();                  
+               }
+           } 
+        });
+    }   
+    
+    
     private void jt_datos_proveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_datos_proveMouseClicked
         int i = jt_datos_prove.getSelectedRow();
         TableModel model = jt_datos_prove.getModel();
@@ -306,6 +348,21 @@ public class jp_proveedores extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jb_cancelar_proveActionPerformed
 
+    private void jtf_nombre_proveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombre_proveKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_nombre_proveKeyPressed
+
+    private void jtf_nombre_proveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombre_proveKeyTyped
+
+    }//GEN-LAST:event_jtf_nombre_proveKeyTyped
+
+    private void jtf_tel_proveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_tel_proveKeyTyped
+        int limit = 10;
+        if(jtf_tel_prove.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_tel_proveKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -322,7 +379,7 @@ public class jp_proveedores extends javax.swing.JPanel {
     private javax.swing.JPanel jp_button_prov;
     private javax.swing.JPanel jp_proveedores;
     private javax.swing.JTable jt_datos_prove;
-    private javax.swing.JTextField jtf_id_prove;
+    public javax.swing.JTextField jtf_id_prove;
     private javax.swing.JTextField jtf_nombre_prove;
     private javax.swing.JTextField jtf_tel_prove;
     // End of variables declaration//GEN-END:variables

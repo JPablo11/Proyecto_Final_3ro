@@ -1,15 +1,21 @@
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Registrarse extends javax.swing.JFrame {
 
     public Registrarse() {
         initComponents();
         this.setLocationRelativeTo(null);
+        SUser(jtf_user_name);
+        SUser(jpf_passwd_new);
+        SUser(jpf_passwd_new_two);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +35,7 @@ public class Registrarse extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jp_registrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -41,6 +48,12 @@ public class Registrarse extends javax.swing.JFrame {
         jl_passwd_new_two.setForeground(new java.awt.Color(255, 255, 255));
         jl_passwd_new_two.setText("Reingresar contraseña");
         jp_registrar.add(jl_passwd_new_two, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        jtf_user_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_user_nameKeyTyped(evt);
+            }
+        });
         jp_registrar.add(jtf_user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 79, 111, -1));
 
         jb_register.setBackground(new java.awt.Color(0, 255, 0));
@@ -80,13 +93,13 @@ public class Registrarse extends javax.swing.JFrame {
         jButton13.setText("X");
         jButton13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 102, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(51, 102, 255), new java.awt.Color(153, 0, 153)));
         jButton13.setBorderPainted(false);
-        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
             }
         });
-        jp_registrar.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 0, 29, -1));
+        jp_registrar.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 29, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg_top_img.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -106,6 +119,18 @@ public class Registrarse extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void SUser(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(Character.isLetter(c) || Character.isDigit(c)){
+               }else{
+                   e.consume();
+               }
+           } 
+        });
+    }
+    
     private void jb_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backActionPerformed
         Login log = new Login();
         log.setVisible(true);
@@ -116,7 +141,7 @@ public class Registrarse extends javax.swing.JFrame {
         Mysql mysql = new Mysql();
         Connection con = mysql.getConnection();
         PreparedStatement ps = null;
-        String sql = ("INSERT INTO usuarios(nombre_usuario, password) values (?,?);");
+        String sql = ("INSERT INTO usuarios(nombre_usuario, passwd) values (?,?);");
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, jtf_user_name.getText());
@@ -126,7 +151,10 @@ public class Registrarse extends javax.swing.JFrame {
             }else{
                 if(Arrays.equals(jpf_passwd_new_two.getPassword(), jpf_passwd_new.getPassword())){
                     ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Se insertaron los registros");
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado.");
+                    Login log = new Login();
+                    log.setVisible(true);
+                    this.dispose();
                     jtf_user_name.setText(null);
                     jpf_passwd_new.setText(null);
                     jpf_passwd_new_two.setText(null);
@@ -140,8 +168,17 @@ public class Registrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_registerActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        System.exit(0);
+        int eliminar = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicación?", "Salir", JOptionPane.YES_NO_OPTION);
+            if(eliminar == 0){
+                System.exit(0);
+            }else{
+                
+            }
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jtf_user_nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_user_nameKeyTyped
+        
+    }//GEN-LAST:event_jtf_user_nameKeyTyped
 
     /**
      * @param args the command line arguments

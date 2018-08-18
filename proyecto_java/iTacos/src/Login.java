@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    
+    private ResultSet rs;
+    private PreparedStatement ps;
     Mysql mysql = new Mysql();
     Connection con = mysql.getConnection();
     
@@ -29,9 +32,10 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jp_login.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jp_login.add(jtf_user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 138, -1));
+        jp_login.add(jtf_user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 138, -1));
 
         jb_login.setBackground(new java.awt.Color(0, 204, 0));
         jb_login.setFont(new java.awt.Font("Yu Gothic Light", 1, 12)); // NOI18N
@@ -58,13 +62,13 @@ public class Login extends javax.swing.JFrame {
         jl_nombre_log.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jl_nombre_log.setForeground(new java.awt.Color(255, 255, 255));
         jl_nombre_log.setText("Nombre de Usuario");
-        jp_login.add(jl_nombre_log, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jp_login.add(jl_nombre_log, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jl_passwd.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
         jl_passwd.setForeground(new java.awt.Color(255, 255, 255));
         jl_passwd.setText("Contraseña");
-        jp_login.add(jl_passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
-        jp_login.add(jpf_passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 138, -1));
+        jp_login.add(jl_passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+        jp_login.add(jpf_passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 138, -1));
 
         jButton13.setBackground(new java.awt.Color(255, 0, 0));
         jButton13.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
@@ -72,7 +76,7 @@ public class Login extends javax.swing.JFrame {
         jButton13.setText("X");
         jButton13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 102, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(51, 102, 255), new java.awt.Color(153, 0, 153)));
         jButton13.setBorderPainted(false);
-        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -102,36 +106,35 @@ public class Login extends javax.swing.JFrame {
         
         String user = jtf_user_name.getText();
         String pass = jpf_passwd.getText();
-        if(pass.isEmpty() && user.isEmpty()){
+        if(pass.isEmpty() || user.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se pueden dejar campos vacíos");
-        }else {
-        int conta=0;
-        try{
+        }else{
             String sql = "SELECT * FROM usuarios";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int codigo = rs.getInt(1);
-                String usuario = rs.getString(2);
-                String contra = rs.getString(3);
-                if(user.equals(usuario) && pass.equals(contra)){
-                    JOptionPane.showMessageDialog(null, "Bienvenido: " +user );
-                    Interface inf = new Interface();
-                    inf.setVisible(true);
-                    this.dispose();
-                }else{
-                    conta++;
-                }     
+            Mysql mysql = new Mysql();
+            Connection con = mysql.getConnection(); 
+            try { 
+                ps = (PreparedStatement) con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    String usuario = rs.getString("nombre_usuario");
+                    String contra = rs.getString("passwd");
+                    if(user.equals(usuario) && pass.equals(contra)){
+                        JOptionPane.showMessageDialog(null, "Bienvenido: " +user );
+                        Interface inf = new Interface();
+                        inf.setVisible(true);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Administrador y/o contraseña incorrectas");
+                    }     
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "No se puede realizar la opreación.");
             }
-            if (conta >= 100){
-                JOptionPane.showMessageDialog(this, "Administrador y/o contraseña incorrectas");
-            }
+        
             
-        }catch (HeadlessException | SQLException e){
-            JOptionPane.showMessageDialog(null, "Error al iniciar");
         }
     }//GEN-LAST:event_jb_loginActionPerformed
-    }
+    
     private void jb_registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_registrarseActionPerformed
         Registrarse rgs = new Registrarse();
         rgs.setVisible(true);
@@ -139,7 +142,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_registrarseActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        System.exit(0);
+        int eliminar = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicación?", "Salir", JOptionPane.YES_NO_OPTION);
+            if(eliminar == 0){
+                System.exit(0);
+            }else{
+                
+            }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     /**

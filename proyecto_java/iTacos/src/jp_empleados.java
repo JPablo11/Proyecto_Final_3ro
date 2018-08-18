@@ -1,10 +1,13 @@
 
+    import java.awt.event.KeyAdapter;
+    import java.awt.event.KeyEvent;
     import java.sql.Connection;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.sql.Statement;
     import java.sql.PreparedStatement;
     import javax.swing.JOptionPane;
+    import javax.swing.JTextField;
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableModel;
     
@@ -39,6 +42,9 @@ public class jp_empleados extends javax.swing.JPanel {
     public jp_empleados() {
         initComponents();
         cargar();
+        SLetras(jtf_nombre_emp);
+        SLetras(jtf_ape_pat_emp);
+        SLetras(jtf_ape_mat_emp);
     }
     void cargar(){
         String [] titulos={"ID","Nombre","Apellido Paterno","Apellido Materno"};
@@ -92,6 +98,7 @@ public class jp_empleados extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         jp_empleados.setBackground(new java.awt.Color(255, 102, 102));
+        jp_empleados.setInheritsPopupMenu(true);
         jp_empleados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jl_nombre_emp.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
@@ -105,7 +112,19 @@ public class jp_empleados extends javax.swing.JPanel {
         jl_ape_mat_emp.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
         jl_ape_mat_emp.setText("Apellido Materno");
         jp_empleados.add(jl_ape_mat_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, 30));
+
+        jtf_nombre_emp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombre_empKeyTyped(evt);
+            }
+        });
         jp_empleados.add(jtf_nombre_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 111, -1));
+
+        jtf_ape_pat_emp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_ape_pat_empKeyTyped(evt);
+            }
+        });
         jp_empleados.add(jtf_ape_pat_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 111, -1));
 
         jl_id_emp.setFont(new java.awt.Font("Perpetua Titling MT", 1, 12)); // NOI18N
@@ -132,6 +151,12 @@ public class jp_empleados extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jt_datos_emp);
 
         jp_empleados.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 100));
+
+        jtf_ape_mat_emp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_ape_mat_empKeyTyped(evt);
+            }
+        });
         jp_empleados.add(jtf_ape_mat_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 111, -1));
 
         jp_button_emp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -218,6 +243,19 @@ public class jp_empleados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void SLetras(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+           public void keyTyped(KeyEvent e){
+               char c=e.getKeyChar();
+               if(!Character.isLetter(c)){                                      
+                   e.consume();                  
+               }
+           } 
+        });
+    }
+    
+    
+    
     private void jb_nuevo_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevo_empActionPerformed
         
         jtf_id_emp.setEnabled(false);
@@ -328,6 +366,27 @@ public class jp_empleados extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jt_datos_empMouseClicked
 
+    private void jtf_nombre_empKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombre_empKeyTyped
+        int limit = 30;
+        if(jtf_nombre_emp.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_nombre_empKeyTyped
+
+    private void jtf_ape_pat_empKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ape_pat_empKeyTyped
+        int limit = 30;
+        if(jtf_ape_pat_emp.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_ape_pat_empKeyTyped
+
+    private void jtf_ape_mat_empKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ape_mat_empKeyTyped
+        int limit = 30;
+        if(jtf_ape_mat_emp.getText().length()>= limit){            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_ape_mat_empKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -347,7 +406,7 @@ public class jp_empleados extends javax.swing.JPanel {
     private javax.swing.JTable jt_datos_emp;
     private javax.swing.JTextField jtf_ape_mat_emp;
     private javax.swing.JTextField jtf_ape_pat_emp;
-    private javax.swing.JTextField jtf_id_emp;
+    public javax.swing.JTextField jtf_id_emp;
     private javax.swing.JTextField jtf_nombre_emp;
     // End of variables declaration//GEN-END:variables
 }
